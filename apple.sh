@@ -8,23 +8,23 @@ BLUE='\033[36m'
 
 echo "Vui lòng chọn ngôn ngữ | Please select a language"
 echo -e "${YELLOW}Lưu ý rằng ngôn ngữ bạn chọn sẽ ảnh hưởng đến đầu ra của chương trình backend${PLAIN}"
-echo -e "注意，你选择的语言将影响后端程序的输出${PLAIN}"
+echo -e "Please note that the language you choose will affect the output of the backend program${PLAIN}"
 echo -e "${BLUE}Tuy nhiên, script cài đặt này chỉ hỗ trợ tiếng Trung và tiếng Anh${PLAIN}"
 echo -e "${BLUE}However no support for language other than Chinese and English is provided in this installation script${PLAIN}"
-echo "1. Tiếng Trung giản thể (zh_cn)"
+echo "1. Tiếng Trung (zh_cn)"
 echo "2. English (en_us)"
 echo "3. Tiếng Việt (vi_vn)"
 read -e -p "Nhập lựa chọn của bạn (1/2/3): " language
 
 if [ "$language" != "1" ] && [ "$language" != "2" ] && [ "$language" != "3" ]; then
-    echo "Nhập không hợp lệ, thoát | Input error, exit"
+    echo "Lỗi nhập liệu, thoát chương trình | Input error, exit"
     exit 1
 fi
 
 if [ "$language" == '1' ]; then
-    echo "Quản lý Apple ID của bạn theo cách mới, chương trình tự động kiểm tra & mở khóa Apple ID dựa trên câu hỏi bảo mật"
+    echo "Quản lý Apple ID của bạn theo cách mới, chương trình tự động phát hiện và mở khóa Apple ID dựa trên câu hỏi bảo mật"
     echo "Địa chỉ dự án: github.com/pplulee/appleid_auto"
-    echo "Nhóm thảo luận trên TG: @appleunblocker"
+    echo "Nhóm thảo luận dự án TG: @appleunblocker"
     echo "==============================================================="
 else
     echo "Manage your Apple ID in a new way, an automated Apple ID detection & unlocking program based on security questions"
@@ -39,12 +39,12 @@ else
     echo "Docker chưa được cài đặt, bắt đầu cài đặt... | Docker is not installed, start installing..."
     curl -fsSL get.docker.com | sh
     systemctl enable docker && systemctl restart docker
-    echo "Docker đã được cài đặt | Docker installed"
+    echo "Docker đã được cài đặt xong | Docker installed"
 fi
 
 if [ "$language" == '1' ]; then
     echo "Bắt đầu cài đặt backend Apple_Auto"
-    read -e -p "Nhập URL API (tên miền front-end, định dạng http[s]://xxx.xxx): " api_url
+    read -e -p "Nhập URL API (domain frontend, định dạng http[s]://xxx.xxx): " api_url
     read -e -p "Nhập API Key: " api_key
     read -e -p "Có muốn bật cập nhật tự động không? (y/n): " auto_update
     read -e -p "Nhập khoảng thời gian đồng bộ nhiệm vụ (đơn vị: phút, mặc định 15): " sync_time
@@ -82,7 +82,7 @@ if [ "$run_webdriver" == "y" ]; then
         -e SE_SESSION_RETRY_INTERVAL=1 \
         -e SE_START_VNC=false \
         -p $webdriver_port:4444 selenium/standalone-chrome
-    echo "Triển khai container Webdriver Docker hoàn tất | Webdriver Docker container deployed"
+    echo "Triển khai container Webdriver Docker đã hoàn thành | Webdriver Docker container deployed"
 fi
 
 enable_auto_update=$([ "$auto_update" == "y" ] && echo True || echo False)
